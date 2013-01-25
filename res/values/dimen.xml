@@ -2,5 +2,6 @@
 <resources>
     <dimen name="tagButtonWidth">230dp</dimen>
     <dimen name="editButtonWidth">50dp</dimen>
+    <dimen name="padd">5dp</dimen>
     
 </resources>
