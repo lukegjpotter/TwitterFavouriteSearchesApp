@@ -130,8 +130,24 @@ public class TwitterFavouriteSearches extends Activity {
 	 * @param index
 	 */
 	private void makeTagGUI(String tag, int index) {
-		// TODO Auto-generated method stub
 		
+		// Get a reference to the LayoutInflator service
+		LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		// Inflate view_new_tag.XML to create new tag and edit Buttons
+		View viewTagView = inflator.inflate(R.layout.view_new_tag, null);
+		
+		// Get newTagButton, set its text and register its listener
+		Button newTagButton = (Button) viewTagView.findViewById(R.id.newTagButton);
+		newTagButton.setText(tag);
+		newTagButton.setOnClickListener(queryButtonListener);
+		
+		// Get newEditButton and register its listener
+		Button newEditButton = (Button) viewTagView.findViewById(R.id.newEditButton);
+		newEditButton.setOnClickListener(editButtonListener);
+		
+		// Add new tag and edit buttons to the queryTableLayout
+		queryTableLayout.addView(viewTagView, index);
 	}
 
 	
@@ -147,6 +163,24 @@ public class TwitterFavouriteSearches extends Activity {
 	};
 	
 	private OnClickListener clearTagsButtonListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+
+	private OnClickListener queryButtonListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	
+	private OnClickListener editButtonListener = new OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
