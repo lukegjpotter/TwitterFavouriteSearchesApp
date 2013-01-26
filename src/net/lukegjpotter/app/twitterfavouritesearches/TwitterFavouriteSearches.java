@@ -150,6 +150,14 @@ public class TwitterFavouriteSearches extends Activity {
 		queryTableLayout.addView(viewTagView, index);
 	}
 
+	/**
+	 * Remove all the saved search Buttons from the app
+	 */
+	private void clearButtons() {
+		
+		// Remove all saved search Buttons
+		queryTableLayout.removeAllViews();
+	}
 	
 
 	// ---------------- OnClickListeners ----------------
