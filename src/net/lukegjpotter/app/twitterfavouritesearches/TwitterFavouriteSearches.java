@@ -52,6 +52,9 @@ public class TwitterFavouriteSearches extends Activity {
 		refreshButtons(null);
 	}
 
+	/**
+	 * A method to initalise all the widget variable
+	 */
 	private void initaliseVariables() {
 		
 		// Get the SharedPreferences that contains the user's saved searches
@@ -72,34 +75,68 @@ public class TwitterFavouriteSearches extends Activity {
 		clearTagsButton.setOnClickListener(clearTagsButtonListener);
 	}
 	
-	private void refreshButtons(Object object) {
+	/**
+	 * Recreate search tag and edit Buttons for all saved searches.
+	 * Pass null to create all the tag and edit Buttons.
+	 * 
+	 * @param newTag
+	 */
+	private void refreshButtons(String newTag) {
+		
+		// Store saved tags in the tags array.
+		String[] tags = savedSearches.getAll().keySet().toArray(new String[0]);
+		Arrays.sort(tags, String.CASE_INSENSITIVE_ORDER); // Sort by tag
+		
+		// If a new tag was added, insert in GUI at the appropriate location.
+		if (newTag != null) {
+			
+			makeTagGUI(newTag, Arrays.binarySearch(tags, newTag));
+		}
+		else { // Display GUI for all tags
+			
+			// Display all saved searches
+			for (int i = 0; i < tags.length; ++i)
+				makeTagGUI(tags[i], i);
+		}
+	}
+
+	/**
+	 * Add new search to the save file, then refresh all Buttons
+	 * 
+	 * @param query
+	 * @param tag
+	 */
+	private void makeTag(String query, String tag) {
+		
+		// OriginalQuery sill be null if we're modifying an existing search
+		String originalQuery = savedSearches.getString(tag, null);
+		
+		// Get a SharedPreferences.Editor to store new tag/query pair
+		SharedPreferences.Editor prefsEditor = savedSearches.edit();
+		prefsEditor.putString(tag, query); // Store the current search
+		prefsEditor.apply(); // Store the updated preferences
+		
+		// If this is a new query, add its GUI
+		if (originalQuery == null) {
+			
+			refreshButtons(tag); // Adds a new button for this tag
+		}
+	}
+	
+	/**
+	 * Add a new Tag Button and corresponding edit Button to the GUI
+	 * 
+	 * @param tag
+	 * @param index
+	 */
+	private void makeTagGUI(String tag, int index) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// ---------------- OnClickListeners ----------------
 	private OnClickListener saveButtonListener = new OnClickListener() {
 		
 		@Override
