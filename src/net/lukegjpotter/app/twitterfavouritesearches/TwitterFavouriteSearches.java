@@ -256,8 +256,16 @@ public class TwitterFavouriteSearches extends Activity {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			
+			// Get all necessary GUI components
+			TableRow buttonTR = (TableRow) v.getParent();
+			Button searchButton = (Button) buttonTR.findViewById(R.id.newTagButton);
+			
+			String tag = searchButton.getText().toString();
+			
+			// Set EditTexts to match the chosen tag and query
+			tagEditText.setText(tag);
+			queryEditText.setText(savedSearches.getString(tag, null));
 		}
 	};
 }
