@@ -174,8 +174,38 @@ public class TwitterFavouriteSearches extends Activity {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			
+			// Create new AlertDialog Builder
+			AlertDialog.Builder builder = new AlertDialog.Builder(TwitterFavouriteSearches.this);
+			builder.setTitle(R.string.confirmTitle);
+			
+			// Provide an OK button that simply dismisses the dialog
+			builder.setPositiveButton(R.string.erase, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int button) {
+					
+					// Clear all the saved searches from the map
+					clearButtons();
+					
+					// Get a Shared Preferences Editor to clear the searches.
+					SharedPreferences.Editor prefsEditor = savedSearches.edit();
+					prefsEditor.clear();
+					prefsEditor.apply();
+				}
+			});
+			
+			builder.setCancelable(true);
+			builder.setNegativeButton(R.string.cancel, null);
+			
+			// Set the message to display
+			builder.setMessage(R.string.confirmMessage);
+			
+			// Create the Alert Dialog from the builder
+			AlertDialog confirmDialog = builder.create();
+			
+			// Show the dialog
+			confirmDialog.show();
 		}
 	};
 
