@@ -165,8 +165,31 @@ public class TwitterFavouriteSearches extends Activity {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			
+			// Create the tag if both queryEditText and tagEditText are now empty
+			if (queryEditText.getText().length() > 0 && tagEditText.getText().length() > 0) {
+				
+				makeTag(queryEditText.getText().toString(), tagEditText.getText().toString());
+				
+				// Wipe the text boxes
+				queryEditText.setText("");
+				tagEditText.setText("");
+				
+				// Hide the soft keyboard
+				((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(tagEditText.getWindowToken(), 0);
+			}
+			else { // Display a message asking the user to provide a query and a tag.
+				
+				// Create a new Alert Dialog Builder
+				AlertDialog.Builder adbuild = new AlertDialog.Builder(TwitterFavouriteSearches.this);
+				
+				adbuild.setTitle(R.string.missingTitle);
+				adbuild.setPositiveButton(R.string.ok, null);
+				adbuild.setMessage(R.string.missingMessage);
+				
+				AlertDialog errorDialog = adbuild.create();
+				errorDialog.show();
+			}
 		}
 	};
 	
@@ -218,7 +241,7 @@ public class TwitterFavouriteSearches extends Activity {
 			String buttonText = ((Button) v).getText().toString();
 			String query = savedSearches.getString(buttonText, null);
 			
-			// Create the URL coresponding to the touched Button's query
+			// Create the URL corresponding to the touched Button's query
 			String url = getString(R.string.searchURL) + query;
 			
 			// Create an Intent to launch a Web Browser
