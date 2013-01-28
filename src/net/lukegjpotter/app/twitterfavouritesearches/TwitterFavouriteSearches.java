@@ -158,7 +158,7 @@ public class TwitterFavouriteSearches extends Activity {
 		// Remove all saved search Buttons
 		queryTableLayout.removeAllViews();
 	}
-	
+
 
 	// ---------------- OnClickListeners ----------------
 	private OnClickListener saveButtonListener = new OnClickListener() {
