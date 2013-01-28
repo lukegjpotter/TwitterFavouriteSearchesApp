@@ -213,8 +213,19 @@ public class TwitterFavouriteSearches extends Activity {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			
+			// Get the query
+			String buttonText = ((Button) v).getText().toString();
+			String query = savedSearches.getString(buttonText, null);
+			
+			// Create the URL coresponding to the touched Button's query
+			String url = getString(R.string.searchURL) + query;
+			
+			// Create an Intent to launch a Web Browser
+			Intent getURL = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			
+			// Execute the intent
+			startActivity(getURL);
 		}
 	};
 	
